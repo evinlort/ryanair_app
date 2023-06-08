@@ -1,6 +1,6 @@
 Clone the repository to the desired location:
     
-    git clone git@github.com:evinlort/ryanair_app.git
+    git clone https://github.com/evinlort/ryanair_app.git
 
 cd to the project directory:
     
@@ -26,4 +26,4 @@ Run the application:
 
 All in one line:
     
-    git clone git@github.com:evinlort/ryanair_app.git && cd ryanair_app && python -m virtualenv vryanairapp && source vryanairapp/bin/activate && pip install -r requirements.txt && flask --app app run --host=0.0.0.0 --port=5500
+    git clone https://github.com/evinlort/ryanair_app.git && cd ryanair_app && python -m virtualenv vryanairapp && source vryanairapp/bin/activate && pip install -r requirements.txt && flask --app app run --host=0.0.0.0 --port=5500
