@@ -2,13 +2,11 @@ from ryanair import Ryanair
 
 api = Ryanair(currency="EUR")  # Euro currency, so could also be GBP etc. also
 date_from_1 = "2023-09-01"
-date_from_2 = "2023-10-22"
+date_from_2 = "2023-11-03"
 date_to_1 = "2023-09-07"
-date_to_2 = "2023-10-31"
+date_to_2 = "2023-11-15"
 
 custom_params = {
-    "ADT": 4,
-    "CHD": 2,
     "IncludeConnectingFlights": False
 }
 

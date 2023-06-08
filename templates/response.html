@@ -5,19 +5,25 @@
     <title>Response</title>
 </head>
 <body>
+{% if trips %}
 {% for trip in trips %}
-<div>
+<div style="margin-left:30%;">
     <div>Price: {{ trip.totalPrice }}</div>
     <div>Flight to: {{ trip.outbound.destinationFull }}</div>
     <div>Flight to Airport: {{ trip.outbound.destination }}</div>
+    <div>---------------------------------------------</div>
     <div>Outbound departureTime: {{ trip.outbound.departureTime }}</div>
     <div>Outbound arrivalTime: {{ trip.outbound.arrivalTime }}</div>
     <div>---------------------------------------------</div>
     <div>Inbound departureTime: {{ trip.inbound.departureTime }}</div>
     <div>Inbound arrivalTime: {{ trip.inbound.arrivalTime }}</div>
+    <div>---------------------------------------------</div>
     <div>Days: {{ (trip.inbound.departureTime - trip.outbound.departureTime).days }}</div>
 </div>
 <hr />
 {% endfor %}
+{% else %}
+No entries found for the request
+{% endif %}
 </body>
 </html>

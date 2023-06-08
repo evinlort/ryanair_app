@@ -1,9 +1,9 @@
-from ryanair import Ryanair
+from ryanair.ryanair import Ryanair
 
 
-registered_values = ["to", "date_from_1", "date_from_2", "date_to_1", "date_to_2", "trip_min_days", "trip_max_days",
-                     "from_preferred_departure_time", "from_preferred_arrival_time", "to_preferred_departure_time",
-                     "to_preferred_arrival_time", "max_sum"]
+registered_values = ["from_", "to", "date_from_1", "date_from_2", "date_to_1", "date_to_2", "trip_min_days",
+                     "trip_max_days", "from_preferred_departure_time", "from_preferred_arrival_time",
+                     "to_preferred_departure_time", "to_preferred_arrival_time", "max_sum"]
 
 
 class RAir:
@@ -19,7 +19,7 @@ class RAir:
         self.api = Ryanair(currency="EUR")
 
     def get_flights(self):
-        trips = self.api.get_cheapest_return_flights(source_airport="TLV", destination_airport=self.to,
+        trips = self.api.get_cheapest_return_flights(source_airport=self.from_, destination_airport=self.to,
                                                      date_from=self.date_from_1, date_to=self.date_from_2,
                                                      return_date_from=self.date_to_1, return_date_to=self.date_to_2,
                                                      # outbound_departure_time_from=f"{self.from_preferred_departure_time}",
