@@ -20,10 +20,10 @@ Install requirements:
 
 Run the application:
 
-    flask --app app run --host=0.0.0.0
+    flask --app app run --host=0.0.0.0 --port=5500
 
 
 
 All in one line:
     
-    git clone git@github.com:evinlort/ryanair_app.git && cd ryanair_app && python -m virtualenv vryanairapp && source vryanairapp/bin/activate && pip install -r requirements.txt && flask --app app run --host=0.0.0.0 
+    git clone git@github.com:evinlort/ryanair_app.git && cd ryanair_app && python -m virtualenv vryanairapp && source vryanairapp/bin/activate && pip install -r requirements.txt && flask --app app run --host=0.0.0.0 --port=5500
