@@ -8,17 +8,17 @@
 {% if trips %}
 {% for trip in trips %}
 <div style="margin-left:10%;">
-    <div>Price: {{ trip.totalPrice }}</div>
-    <div>Flight to: {{ trip.outbound.destinationFull }}</div>
-    <div>Flight to Airport: {{ trip.outbound.destination }}</div>
+    <div>Price: {{ trip.price }} {{ trip.currency }}</div>
+    <div>Flight to: {{ trip.to }}</div>
+    <div>Flight to Airport: {{ trip.to_airport }}</div>
     <div>---------------------------------------------</div>
-    <div>Outbound departureTime: {{ trip.outbound.departureTime }}</div>
-    <div>Outbound arrivalTime: {{ trip.outbound.arrivalTime }}</div>
+    <div>Outbound departureTime: {{ trip.date_from_departure }}</div>
+    <div>Outbound arrivalTime: {{ trip.date_from_arrival }}</div>
     <div>---------------------------------------------</div>
-    <div>Inbound departureTime: {{ trip.inbound.departureTime }}</div>
-    <div>Inbound arrivalTime: {{ trip.inbound.arrivalTime }}</div>
+    <div>Inbound departureTime: {{ trip.date_back_departure }}</div>
+    <div>Inbound arrivalTime: {{ trip.date_back_arrival }}</div>
     <div>---------------------------------------------</div>
-    <div>Days: {{ (trip.inbound.departureTime - trip.outbound.departureTime).days }}</div>
+    <div>Days: {{ trip.days }}</div>
 </div>
 <hr />
 {% endfor %}

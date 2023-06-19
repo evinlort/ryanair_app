@@ -1,56 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<form method="post">
-    <div><span>FROM:</span><input type="text" value="TLV" name="from_"/></div>
-    <div><span>TO:</span><input type="text" value="" name="to"/></div>
-    <div>
-        <hr/>
-    </div>
-    <div><span>Date from (start):</span><input type="date" name="date_from_1" min="{{ params.today_date }}" /></div>
-    <div><span>Date from (end):</span><input type="date" name="date_from_2" min="{{ params.today_date }}"/></div>
-    <div>
-        <hr/>
-    </div>
-    <div><span>Date to (start):</span><input type="date" name="date_to_1" min="{{ params.today_date }}"/></div>
-    <div><span>Date to (end):</span><input type="date" name="date_to_2" min="{{ params.today_date }}"/></div>
-    <div>
-        <hr/>
-    </div>
-    <div><span>Trip min days:</span><input type="number" name="trip_min_days"/></div>
-    <div><span>Trip max days:</span><input type="number" name="trip_max_days"/></div>
-    <div>
-        <hr/>
-    </div>
-    <div><span>From preferred departure hour (from):</span><input type="number" name="from_preferred_departure_time"/></div>
-    <div><span>From preferred departure hour (to):</span><input type="number" name="from_preferred_departure_time_2"/></div>
-    <div>
-        <hr/>
-    </div>
-    <div><span>To preferred departure hour (from):</span><input type="number" name="to_preferred_departure_time"/></div>
-    <div><span>To preferred departure hour (to):</span><input type="number" name="to_preferred_departure_time_2"/></div>
-    <div>
-        <hr/>
-    </div>
-    <div><span>Max sum:</span><input type="number" name="max_sum"/></div>
-    <div>
-        <hr/>
-    </div>
-<!--
-    <div><span>Trip days length:</span><input type="number" name="days_length" value="0" /></div>
--->
-<div>
-        <hr/>
-    </div>
-    <div><button type="submit">Send</button></div>
-</form>
-<!--<hr />
-<div>
-    The results
-</div>-->
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <form method="post">
+            <div><span>FROM:</span><input type="text" value="TLV" name="from_"/></div>
+            <div><span>TO:</span><input type="text" value="" name="to"/></div>
+            <div><span>Except:</span><input type="text" value="" name="except_airport"/></div>
+            <div>
+                <hr/>
+            </div>
+            <div><span>Date from (start):</span><input type="date" name="date_from" min="{{ params.today_date }}"
+                                                       value="{{ params.today_date }}"/></div>
+            <div>
+                <hr/>
+            </div>
+            <div><span>Date to (start):</span><input type="date" name="date_to" min="{{ params.today_date }}"
+                                                     value="{{ params.today_date }}"/></div>
+            <div>
+                <hr/>
+            </div>
+            <div><span>Trip min days:</span><input type="number" name="trip_min_days"/></div>
+            <div><span>Trip max days:</span><input type="number" name="trip_max_days"/></div>
+            <div>
+                <hr/>
+            </div>
+            <div><span>From - preferred departure hour (from):</span><input type="time" name="from_preferred_departure_time"/>
+            </div>
+            <div><span>From - preferred departure hour (to):</span><input type="time" name="from_preferred_departure_time_2"/>
+            </div>
+            <div>
+                <hr/>
+            </div>
+            <div><span>Back - preferred departure hour (from):</span><input type="time" name="to_preferred_departure_time"/>
+            </div>
+            <div><span>Back - preferred departure hour (to):</span><input type="time" name="to_preferred_departure_time_2"/>
+            </div>
+            <div>
+                <hr/>
+            </div>
+            <div><span>Max sum:</span><input type="number" name="max_sum"/></div>
+            <div>
+                <hr/>
+            </div>
+            <div>
+                <hr/>
+            </div>
+            <div>
+                <button type="submit">Send</button>
+            </div>
+        </form>
+    </body>
+
+    <script>
+    window.addEventListener("load", function () {
+        document.getElementsByClassName('datePicker').valueAsDate = new Date();
+        console.log(document.getElementsByClassName('datePicker'))
+    });
+    </script>
+
 </html>

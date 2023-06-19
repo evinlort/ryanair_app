@@ -134,13 +134,13 @@ class Ryanair:
             return []
 
         if response:
-            return [self._parse_cheapest_return_flights_as_trip(trip["outbound"], trip["inbound"])
+            return [self._parse_cheapest_return_flights_as_trip(trip["outbound"], trip["inbound"], trip["summary"])
                     for trip in response]
         else:
             return []
 
     def get_all_flights(self, origin_airport: str, date_out: Union[datetime, date, str], destination: str,
-                        locale: str = "en-ie", origin_is_mac: bool = False, destination_is_mac: bool = False,
+                        locale: str = "en-gb", origin_is_mac: bool = False, destination_is_mac: bool = False,
                         custom_params: Optional[dict] = None):
         query_url = ''.join((Ryanair.BASE_AVAILABILITY_API_URL, f"{locale}/availability"))
 
@@ -179,6 +179,7 @@ class Ryanair:
         try:
             # Try once to get a new session cookie, just in case the old one has expired.
             # If that fails too, we should raise the exception.
+            self._update_session_cookie()
             response = self._retryable_query(query_url, params)
             if self.check_if_availability_response_is_declined(response):
                 logger.warning("Availability API declined to respond, attempting again with a new session cookie")
@@ -215,12 +216,13 @@ class Ryanair:
     def _on_query_error(e):
         logger.exception(f"Gave up retrying query, last exception was {e}")
 
-    @backoff.on_exception(backoff.expo, Exception, max_tries=5, logger=logger, on_giveup=_on_query_error,
-                          raise_on_giveup=False)
+    # @backoff.on_exception(backoff.expo, Exception, max_tries=5, logger=logger, on_giveup=_on_query_error,
+    #                       raise_on_giveup=False)
     def _retryable_query(self, url, params):
         self._num_queries += 1
 
-        return self.session.get(url, params=params).json()
+        response = self.session.get(url, params=params)
+        return response.json()
 
     def _update_session_cookie(self):
         # Visit main website to get session cookies
@@ -242,14 +244,14 @@ class Ryanair:
             currency=currency
         )
 
-    def _parse_cheapest_return_flights_as_trip(self, outbound, inbound):
+    def _parse_cheapest_return_flights_as_trip(self, outbound, inbound, summary):
         outbound = self._parse_cheapest_flight(outbound)
         inbound = self._parse_cheapest_flight(inbound)
 
         return Trip(
             outbound=outbound,
             inbound=inbound,
-            totalPrice=inbound.price + outbound.price
+            summary=summary
         )
 
     @staticmethod
