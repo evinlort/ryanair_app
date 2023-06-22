@@ -4,9 +4,9 @@ from ryanair import Ryanair
 from datetime import datetime, timedelta
 
 api = Ryanair(currency="EUR")  # Euro currency, so could also be GBP etc. also
-date_from = datetime.strptime("2023-09-01", "%Y-%m-%d")
+date_from = datetime.strptime("2023-10-13", "%Y-%m-%d")
 loop_date_from = date_from
-date_to = datetime.strptime("2023-10-25", "%Y-%m-%d")
+date_to = datetime.strptime("2023-10-20", "%Y-%m-%d")
 loop_date_to = date_to
 
 custom_params = {
@@ -15,13 +15,18 @@ custom_params = {
 start = time.time()
 trips_aggregator = []
 rounds = 0
-max_sum = 99
-min_days = 5
+max_sum = 200
+min_days = 4
 max_days = 8
 d_f = 10
 d_t = 15
 b_f = 13
 b_t = 19
+
+# d_f = "00"
+# d_t = "23"
+# b_f = "00"
+# b_t = "23"
 
 depart_from = f"{d_f}:00"
 back_from = f"{b_f}:00"
@@ -52,12 +57,12 @@ for date in dates:
                                             inbound_departure_time_to=back_to,
                                             )
     for trip in trips:
-        if trip.outbound.departureTime.hour < 10 or trip.outbound.departureTime.hour > 16:
-            continue
-        if trip.inbound.departureTime.hour > 15 or trip.inbound.departureTime.hour < 10:
-            continue
-        #if "Paphos" in trip.outbound.destinationFull:
-        #    continue
+        # if trip.outbound.departureTime.hour < 10 or trip.outbound.departureTime.hour > 16:
+        #     continue
+        # if trip.inbound.departureTime.hour > 15 or trip.inbound.departureTime.hour < 10:
+        #     continue
+        if "Paphos" in trip.outbound.destinationFull:
+           continue
         trips_aggregator.append(
             {
                 "price": trip.summary['price']['value'],
@@ -81,7 +86,7 @@ else:
 
 for index, t in enumerate(sorted_trips, start=1):
     print(f"{index}. Price: {t['price']} {t['currency']}, to: {t['to']}, "
-          f"date out: {t['date_from_departure']} --- {t['date_from_arrival']}, date back {t['date_back_departure']} --- "
+          f"date out: {t['date_from_departure']} --- {t['date_from_arrival']}, date back: {t['date_back_departure']} --- "
           f"{t['date_back_arrival']}, days: {t['days']}")
 
 print(f"Results: {len(trips_aggregator)}")

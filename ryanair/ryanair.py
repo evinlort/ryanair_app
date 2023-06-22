@@ -40,6 +40,7 @@ class Ryanair:
     BASE_SERVICES_API_URL = "https://services-api.ryanair.com/farfnd/v4/"
     BASE_AVAILABILITY_API_URL = "https://www.ryanair.com/api/booking/v4/"
     BASE_SITE_FOR_SESSION_URL = "https://www.ryanair.com/ie/en"
+    AIRPORTS_URL = "https://www.ryanair.com/api/booking/v4/en-gb/res/stations"
 
     def __init__(self, currency: Optional[str] = None):
         self.currency = currency
